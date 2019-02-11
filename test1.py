@@ -8,9 +8,9 @@ def w2file(data,name):
     if(os.path.isfile(path_name)):
         i=1;
         split_path=path_name.split('.')
-        while(os.path.isfile(split_path[0]+str(i)+split_path[1])):
+        while(os.path.isfile(split_path[0]+str(i)+'.'+split_path[1])):
             i=i+1;
-        obj.writeto(split_path[0]+str(i)+split_path[1]);
+        obj.writeto(split_path[0]+str(i)+'.'+split_path[1]);
     else:
         obj.writeto('/home/ibac/Downloads/IBAC Research Group/Data/Sample/'+name);
 
@@ -96,6 +96,9 @@ def obs(bias_data,flat_data,getout=True):
     return unbf_data;
 
 def main(get_bias=True,get_flat=True,get_obs=True):
+    bias=[];
+    flat=[];
+    final=[];
     bias=bias(get_bias);
     flat=flat(bias,get_flat);
     final=obs(bias,flat,get_obs);

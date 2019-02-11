@@ -1,4 +1,5 @@
 from astropy.io import fits
+import os.path
 import numpy
 
 def bias(getout):
@@ -82,7 +83,14 @@ def obs(bias_data,flat_data,getout):
         w2file(unbf_data,"/Obj/final.fits");
     return unbf_data;
 
-
 def w2file(data,name):
     obj=fits.PrimaryHDU(data);
-    obj.writeto('/home/ibac/Downloads/IBAC Research Group/Data/Sample/'+name);
+    path_name='/home/ibac/Downloads/IBAC Research Group/Data/Sample/'+name;
+    if(os.path.isfile(path_name)):
+        i=1;
+        split_path=path_name.split('.')
+        while(os.path.isfile(split_path[0]+str(i)+split_path[1])):
+            i=i+1;
+        obj.writeto(split_path[0]+str(i)+split_path[1]);
+    else:
+        obj.writeto('/home/ibac/Downloads/IBAC Research Group/Data/Sample/'+name);

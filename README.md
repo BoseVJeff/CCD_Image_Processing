@@ -7,3 +7,9 @@ The code relies on two pieces of pre-observation data - 1. Dark Bias Observation
 <b>Dependencies</b>
 1. Numpy - For manipulation of data matrices
 2. Astropy (Specifically astropy.io.fits flies) - For accessing FITS files and to output the results as FITS files
+
+<b>Using the Code</b>
+Invoke the test1.bias(out) function and store the result in var b(say)
+Then invoke test1.flat(b,out) and store the result in var f(say)
+Then invoke test1.obs(b,f,out) for the final result
+The optional argument 'out' in each of the functions is boolean and allows the function to print the output as a FITS file.

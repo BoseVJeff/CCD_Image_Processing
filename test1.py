@@ -96,7 +96,7 @@ def obs(bias_data,flat_data,getout=True):
     return unbf_data;
 
 def main(get_bias=True,get_flat=True,get_obs=True):
-    bias=bias(get_bias);
-    flat=flat(bias,get_flat);
-    final=obs(bias,flat,get_obs);
-    return final;
+    b=bias(get_bias);
+    f=flat(b,get_flat);
+    o=obs(b,f);
+    return o;

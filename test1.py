@@ -2,7 +2,19 @@ from astropy.io import fits
 import os.path
 import numpy
 
-def bias(getout):
+def w2file(data,name):
+    obj=fits.PrimaryHDU(data);
+    path_name='/home/ibac/Downloads/IBAC Research Group/Data/Sample/'+name;
+    if(os.path.isfile(path_name)):
+        i=1;
+        split_path=path_name.split('.')
+        while(os.path.isfile(split_path[0]+str(i)+split_path[1])):
+            i=i+1;
+        obj.writeto(split_path[0]+str(i)+split_path[1]);
+    else:
+        obj.writeto('/home/ibac/Downloads/IBAC Research Group/Data/Sample/'+name);
+
+def bias(getout=True):
     img_obj=[0]*8;
     img_data=[0]*8;
     #Importing all images
@@ -42,7 +54,7 @@ def bias(getout):
     
     return bias_data;
 
-def flat(bias_data,getout):
+def flat(bias_data,getout=True):
     img_obj=[0]*5
     img_data=[0]*5
     img_location="/home/ibac/Downloads/IBAC Research Group/Data/Sample/Flat/flat_R.4565.0.fits";
@@ -73,7 +85,7 @@ def flat(bias_data,getout):
         w2file(norm_flat_data,'Flat/net_flat.fits')
     return norm_flat_data
 
-def obs(bias_data,flat_data,getout):
+def obs(bias_data,flat_data,getout=True):
     img_location="/home/ibac/Downloads/IBAC Research Group/Data/Sample/Obj/J0901p3846_R.4577.0.fits";
     img_obj=fits.open(img_location);
     img_data=img_obj[0].data;
@@ -83,14 +95,8 @@ def obs(bias_data,flat_data,getout):
         w2file(unbf_data,"/Obj/final.fits");
     return unbf_data;
 
-def w2file(data,name):
-    obj=fits.PrimaryHDU(data);
-    path_name='/home/ibac/Downloads/IBAC Research Group/Data/Sample/'+name;
-    if(os.path.isfile(path_name)):
-        i=1;
-        split_path=path_name.split('.')
-        while(os.path.isfile(split_path[0]+str(i)+split_path[1])):
-            i=i+1;
-        obj.writeto(split_path[0]+str(i)+split_path[1]);
-    else:
-        obj.writeto('/home/ibac/Downloads/IBAC Research Group/Data/Sample/'+name);
+def main(get_bias=True,get_flat=True,get_obs=True):
+    bias=bias(get_bias);
+    flat=flat(bias,get_flat);
+    final=obs(bias,flat,get_obs);
+    return final;

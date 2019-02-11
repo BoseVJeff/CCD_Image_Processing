@@ -9,6 +9,8 @@ The code relies on two pieces of pre-observation data - 1. Dark Bias Observation
 2. Astropy (Specifically astropy.io.fits flies) - For accessing FITS files and to output the results as FITS files
 
 <b>Using the Code</b>
+Invoke the main() function to run the program. Optionally, provide arguments to not get output FITS files
+For ganular control,
 Invoke the test1.bias(out) function and store the result in var b(say)
 Then invoke test1.flat(b,out) and store the result in var f(say)
 Then invoke test1.obs(b,f,out) for the final result

@@ -33,7 +33,7 @@ def bias(getout):
     
     bias_data=numpy.median(img_data,axis=0);
     if(getout):
-        w2file(bias_data,'Bias/netBias.fits');       #TODO Underscores donot work
+        w2file(bias_data,'Bias/net_bias.fits');
     #bias_obj=fits.PrimaryHDU(bias_data);
     #bias_obj.writeto('/home/ibac/Downloads/IBAC Research Group/Data/Sample/Bias/bias_net.fits');
     #Close all Data Streams
@@ -70,7 +70,7 @@ def flat(bias_data,getout):
     flat_avg=numpy.mean(flat_data)
     norm_flat_data=numpy.divide(flat_data,flat_avg);
     if(getout):
-        w2file(norm_flat_data,'Flat/netFlat.fits')
+        w2file(norm_flat_data,'Flat/net_flat.fits')
     return norm_flat_data
 
 def obs(bias_data,flat_data,getout):
